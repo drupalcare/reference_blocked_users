@@ -1,0 +1,29 @@
+{
+    "name": "drupal/reference_blocked_users",
+    "description": "Permission to select all active and blocked users in any entity reference user field.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Alaa Haddad (alaahaddad.com)",
+            "homepage": "https://www.drupal.org/u/flashwebcenter",
+            "role": "Maintainer"
+        }
+    ],
+    "homepage": "https://drupal.org/project/reference_blocked_users",
+    "support": {
+        "issues": "https://drupal.org/project/issues/reference_blocked_users",
+        "source": "https://git.drupalcode.org/project/reference_blocked_users"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Drupal\\reference_blocked_users\\": "src"
+        }
+    }
+}

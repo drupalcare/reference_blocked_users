@@ -1,0 +1,3 @@
+reference blocked users:
+  title: 'Reference blocked users'
+  description: 'Permission to reference all users (active/blocked) in entity reference user field and in Authored by field'
