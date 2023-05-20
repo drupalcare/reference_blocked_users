@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @EntityReferenceSelection(
  * id = "default:reference_blocked_users",
- * label = @translation("Reference Blocked Users"),
+ * label = @Translation("Reference Blocked Users"),
  * entity_types = {"user"},
  * group = "default",
  * weight = 10
@@ -84,7 +84,7 @@ class ReferenceAllUsers extends UserSelection {
    *   The query object that can query the given entity type.
    */
   protected function buildEntityQuery($match = NULL, $match_operator = 'CONTAINS'): QueryInterface {
-    // For user with the referenced blocked users permission.
+    // For user with the referenced blocked users' permission.
     if (!$this->currentUser->hasPermission('administer users') &&
          $this->currentUser->hasPermission('reference blocked users')) {
 
