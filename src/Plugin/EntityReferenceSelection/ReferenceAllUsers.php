@@ -109,6 +109,7 @@ class ReferenceAllUsers extends UserSelection {
    */
   protected function buildEntityQueryForAllUsers($match = NULL, $match_operator = 'CONTAINS'): QueryInterface {
     $query = $this->entityTypeManager->getStorage('user')->getQuery();
+    $query->accessCheck(TRUE);
     // The user entity doesn't have a label column.
     $configuration = $this->getConfiguration();
 
