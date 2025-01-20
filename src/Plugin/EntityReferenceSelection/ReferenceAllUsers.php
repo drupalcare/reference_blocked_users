@@ -107,7 +107,7 @@ class ReferenceAllUsers extends UserSelection {
    * @return \Drupal\Core\Entity\Query\QueryInterface
    *   The query object that can query the given entity type.
    */
-  protected function buildEntityQueryForAllUsers($match = NULL, $match_operator = 'CONTAINS'): QueryInterface {
+  protected function buildEntityQueryForAllUsers(string $match = NULL, string $match_operator = 'CONTAINS'): QueryInterface {
     $query = $this->entityTypeManager->getStorage('user')->getQuery();
     $query->accessCheck();
     // The user entity doesn't have a label column.
