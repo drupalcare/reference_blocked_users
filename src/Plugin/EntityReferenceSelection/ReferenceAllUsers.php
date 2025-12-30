@@ -50,9 +50,30 @@ class ReferenceAllUsers extends UserSelection {
    * @param \Drupal\Core\Entity\EntityRepositoryInterface|null $entity_repository
    *   The entity repository.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, AccountInterface $current_user, Connection $connection, EntityFieldManagerInterface $entity_field_manager = NULL, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, EntityRepositoryInterface $entity_repository = NULL) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $module_handler, $current_user, $connection, $entity_field_manager, $entity_type_bundle_info, $entity_repository);
-
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    EntityTypeManagerInterface $entity_type_manager,
+    ModuleHandlerInterface $module_handler,
+    AccountInterface $current_user,
+    Connection $connection,
+    ?EntityFieldManagerInterface $entity_field_manager = NULL,
+    ?EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL,
+    ?EntityRepositoryInterface $entity_repository = NULL,
+  ) {
+    parent::__construct(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $entity_type_manager,
+      $module_handler,
+      $current_user,
+      $connection,
+      $entity_field_manager,
+      $entity_type_bundle_info,
+      $entity_repository,
+    );
   }
 
   /**
@@ -69,21 +90,14 @@ class ReferenceAllUsers extends UserSelection {
       $container->get('database'),
       $container->get('entity_field.manager'),
       $container->get('entity_type.bundle.info'),
-      $container->get('entity.repository')
+      $container->get('entity.repository'),
     );
   }
 
   /**
-   * Get referenced blocked users if you have the permission.
-   *
-   * @param string|null $match
-   *   Text to match the label against.
-   * @param string $match_operator
-   *   The operation the matching should be done with.
-   *
-   *   The query object that can query the given entity type.
+   * {@inheritdoc}
    */
-  protected function buildEntityQuery($match = NULL, $match_operator = 'CONTAINS'): QueryInterface {
+  protected function buildEntityQuery($match = NULL, $match_operator = 'CONTAINS') {
     // For user with the referenced blocked users' permission.
     if (!$this->currentUser->hasPermission('administer users') &&
          $this->currentUser->hasPermission('reference blocked users')) {
@@ -93,7 +107,6 @@ class ReferenceAllUsers extends UserSelection {
     }
 
     return parent::buildEntityQuery($match, $match_operator);
-
   }
 
   /**
@@ -107,7 +120,7 @@ class ReferenceAllUsers extends UserSelection {
    * @return \Drupal\Core\Entity\Query\QueryInterface
    *   The query object that can query the given entity type.
    */
-  protected function buildEntityQueryForAllUsers(string $match = NULL, string $match_operator = 'CONTAINS'): QueryInterface {
+  protected function buildEntityQueryForAllUsers(?string $match = NULL, string $match_operator = 'CONTAINS'): QueryInterface {
     $query = $this->entityTypeManager->getStorage('user')->getQuery();
     $query->accessCheck();
     // The user entity doesn't have a label column.
