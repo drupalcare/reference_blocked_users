@@ -3,6 +3,7 @@
 namespace Drupal\reference_blocked_users\Plugin\EntityReferenceSelection;
 
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Entity\Attribute\EntityReferenceSelection;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
@@ -10,21 +11,20 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\user\Plugin\EntityReferenceSelection\UserSelection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 /**
- * Reference blocked users in entity reference field .
- *
- * @EntityReferenceSelection(
- * id = "default:reference_blocked_users",
- * label = @Translation("Reference Blocked Users"),
- * entity_types = {"user"},
- * group = "default",
- * weight = 10
- * )
+ * Reference blocked users in an entity reference field.
  */
+#[EntityReferenceSelection(
+  id: "default:reference_blocked_users",
+  label: new TranslatableMarkup("Reference Blocked Users"),
+  entity_types: ["user"],
+  group: "default",
+  weight: 10
+)]
 class ReferenceAllUsers extends UserSelection {
 
   /**
