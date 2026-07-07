@@ -1,47 +1,62 @@
-# INTRODUCTION
-There are two places you'll be looking for entity reference users.
+# Reference Blocked Users
 
-The first field is "authored by", found under authoring information. It's
-available in any content type you create. In order to see that field as a
-content editor, you must have the permission to "administer content".
+## Contents
 
-The second place where you will need to reference users is to add a custom
-field in a content type as entity reference user. This field has a configuration
-form that asks you to fill out "reference method","filter by" and "sort by".
+- Introduction
+- Requirements
+- Installation
+- Configuration
+- Permissions
+- Maintainers
 
-In Drupal core,
-../core/modules/user/src/Plugin/EntityReferenceSelection/UserSelection.php the
-user selection class will provide the entity selection for the user and in order
-to view all users, blocked/active, you must have the permission "administer
-users".
+## Introduction
 
+There are two places where you reference users through an entity reference
+field:
 
-Why did I make this module? I want the content editors to have the ability to be
-able to reference all users (blocked and active) in authored by field or in any
-custom entity reference user field.
+1. The **Authored by** field found under *Authoring information* on any content
+   type. To see it as a content editor you need the *Administer content*
+   permission.
+2. A custom **entity reference** field that points at the user entity. Its
+   configuration form lets you choose a reference method, a "filter by" option
+   and a "sort by" option.
 
-There is some work available on Drupal to create a patch that gives you the
-ability to include the blocked users in the configuration form for the custom
-field. But, there is no solution for the "authored by" field, because the
-authored by field does not have a configuration form.
+In Drupal core, `UserSelection`
+(`core/modules/user/src/Plugin/EntityReferenceSelection/UserSelection.php`)
+provides the selection logic for user reference fields, and it only lets you
+reference **blocked** users if you have the powerful *Administer users*
+permission.
 
-I wanted one solution for both scenarios (the "authored by" and custom field).
-The solution is to create a custom permission that can be assigned to any role
-in the system, that allows that role to reference all users (blocked and active)
-That's what this module does.
+This module lets content editors reference **all** users — both active and
+blocked — in the "Authored by" field and in any custom user reference field,
+*without* granting them *Administer users*. It does this by adding a single,
+assignable permission, **Reference blocked users**. Existing patches on
+drupal.org only address the custom field's configuration form; because the
+"Authored by" field has no configuration form, this permission-based approach
+is the one solution that covers both cases.
 
-# DEPENDENCIES
-None
+## Requirements
 
-# INSTALLATION
-Install as any other contributed module.
+Drupal 11.3+ or Drupal 12. No other dependencies.
 
-# REQUIREMENTS
- None
+## Installation
 
-# CONFIGURATION
-None
+Install as you would normally install a contributed Drupal module. See
+[Installing Drupal modules](https://www.drupal.org/docs/extending-drupal/installing-drupal-modules)
+for further information.
 
+## Configuration
 
-# PERMISSIONS
- You must to assign the permission to the role.
+This module has no settings page. Its behaviour is controlled entirely by the
+permission below.
+
+## Permissions
+
+Grant the **Reference blocked users** permission to any role that should be able
+to reference active and blocked users in user reference fields (including
+"Authored by"). Users who already have *Administer users* keep core's default
+behaviour.
+
+## Maintainers
+
+- Alaa Haddad (flashwebcenter) - https://www.drupal.org/u/flashwebcenter

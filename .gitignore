@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# Claude Code (local tooling — not part of the released module)
+/.claude/
+/CLAUDE.md
