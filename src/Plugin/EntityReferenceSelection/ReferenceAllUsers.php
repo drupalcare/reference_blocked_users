@@ -2,15 +2,8 @@
 
 namespace Drupal\reference_blocked_users\Plugin\EntityReferenceSelection;
 
-use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\Attribute\EntityReferenceSelection;
-use Drupal\Core\Entity\EntityFieldManagerInterface;
-use Drupal\Core\Entity\EntityRepositoryInterface;
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\user\Plugin\EntityReferenceSelection\UserSelection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -26,56 +19,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
   weight: 10
 )]
 class ReferenceAllUsers extends UserSelection {
-
-  /**
-   * Constructs a new UserSelection object.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager service.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
-   *   The module handler service.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user.
-   * @param \Drupal\Core\Database\Connection $connection
-   *   The database connection.
-   * @param \Drupal\Core\Entity\EntityFieldManagerInterface|null $entity_field_manager
-   *   The entity field manager.
-   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface|null $entity_type_bundle_info
-   *   The entity type bundle info service.
-   * @param \Drupal\Core\Entity\EntityRepositoryInterface|null $entity_repository
-   *   The entity repository.
-   */
-  public function __construct(
-    array $configuration,
-    $plugin_id,
-    $plugin_definition,
-    EntityTypeManagerInterface $entity_type_manager,
-    ModuleHandlerInterface $module_handler,
-    AccountInterface $current_user,
-    Connection $connection,
-    ?EntityFieldManagerInterface $entity_field_manager = NULL,
-    ?EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL,
-    ?EntityRepositoryInterface $entity_repository = NULL,
-  ) {
-    parent::__construct(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $entity_type_manager,
-      $module_handler,
-      $current_user,
-      $connection,
-      $entity_field_manager,
-      $entity_type_bundle_info,
-      $entity_repository,
-    );
-  }
 
   /**
    * {@inheritdoc}
