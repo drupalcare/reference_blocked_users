@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
   group: "default",
   weight: 10
 )]
-class ReferenceAllUsers extends UserSelection {
+final class ReferenceAllUsers extends UserSelection {
 
   /**
    * {@inheritdoc}
@@ -67,7 +67,6 @@ class ReferenceAllUsers extends UserSelection {
   protected function buildEntityQueryForAllUsers(?string $match = NULL, string $match_operator = 'CONTAINS'): QueryInterface {
     $query = $this->entityTypeManager->getStorage('user')->getQuery();
     $query->accessCheck(TRUE);
-    // The user entity doesn't have a label column.
     $configuration = $this->getConfiguration();
 
     // Filter out the Anonymous user if the selection handler is configured to
