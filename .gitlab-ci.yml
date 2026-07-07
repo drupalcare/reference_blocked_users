@@ -1,0 +1,18 @@
+# Drupal.org GitLab CI for reference_blocked_users.
+#
+# For details on customizing this file see:
+# https://www.drupal.org/docs/develop/git/using-gitlab-to-contribute-to-drupal/gitlab-ci
+# https://project.pages.drupalcode.org/gitlab_templates/
+include:
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - '/includes/include.drupalci.main.yml'
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
+
+variables:
+  # This 2.x branch targets Drupal 11.3+ and 12. Run the jobs against the next
+  # major (Drupal 12) in addition to the current core version so the D12
+  # readiness of this branch is verified on every pipeline.
+  OPT_IN_TEST_NEXT_MAJOR: '1'
