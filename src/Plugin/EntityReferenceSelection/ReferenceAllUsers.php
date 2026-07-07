@@ -133,9 +133,14 @@ class ReferenceAllUsers extends UserSelection {
       $query->condition('uid', 0, '<>');
     }
 
-    // The user entity doesn't have a label column.
+    // The user entity doesn't have a label column. Match the typed text against
+    // the username or the email address, so editors can find a user by either.
+    // Core's UserSelection only matches the username.
     if (isset($match)) {
-      $query->condition('name', $match, $match_operator);
+      $group = $query->orConditionGroup()
+        ->condition('name', $match, $match_operator)
+        ->condition('mail', $match, $match_operator);
+      $query->condition($group);
     }
 
     // Filter by role.

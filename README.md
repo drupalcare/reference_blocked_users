@@ -35,6 +35,9 @@ drupal.org only address the custom field's configuration form; because the
 "Authored by" field has no configuration form, this permission-based approach
 is the one solution that covers both cases.
 
+For users who have the permission, the autocomplete also matches on the **email
+address** as well as the username — core only ever matches the username.
+
 ## Requirements
 
 Drupal 11.3+ or Drupal 12. No other dependencies.
