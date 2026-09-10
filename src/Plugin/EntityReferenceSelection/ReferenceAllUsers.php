@@ -22,8 +22,27 @@ final class ReferenceAllUsers extends UserSelection {
 
   /**
    * {@inheritdoc}
+   *
+   * The native `static` return type is declared here deliberately.
+   * PluginBase::create() has no return type, and Symfony's DebugClassLoader
+   * warns that core "might add static as a native return type declaration in
+   * the future", naming this child class. Declaring it now is forward
+   * compatible on both supported majors: a parent that later declares the same
+   * type still matches, and a parent with no type always matches.
+   *
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   The service container.
+   * @param array<string, mixed> $configuration
+   *   Plugin configuration.
+   * @param string $plugin_id
+   *   Plugin ID.
+   * @param mixed $plugin_definition
+   *   Plugin definition.
+   *
+   * @return static
+   *   The configured plugin instance.
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     return new static(
       $configuration,
       $plugin_id,
@@ -40,8 +59,21 @@ final class ReferenceAllUsers extends UserSelection {
 
   /**
    * {@inheritdoc}
+   *
+   * Returns QueryInterface natively for the same reason as create() above:
+   * DefaultSelection::buildEntityQuery() declares no return type, and
+   * DebugClassLoader asks child classes to declare it before core does.
+   * Both branches below already return a QueryInterface.
+   *
+   * @param string|null $match
+   *   Text to match the label against.
+   * @param string $match_operator
+   *   The operator to use for matching.
+   *
+   * @return \Drupal\Core\Entity\Query\QueryInterface
+   *   The query object that can query the given entity type.
    */
-  protected function buildEntityQuery($match = NULL, $match_operator = 'CONTAINS') {
+  protected function buildEntityQuery($match = NULL, $match_operator = 'CONTAINS'): QueryInterface {
     // For user with the referenced blocked users' permission.
     if (!$this->currentUser->hasPermission('administer users') &&
          $this->currentUser->hasPermission('reference blocked users')) {
