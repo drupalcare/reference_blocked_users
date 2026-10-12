@@ -27,8 +27,8 @@ provides the selection logic for user reference fields, and it only lets you
 reference **blocked** users if you have the powerful *Administer users*
 permission.
 
-This module lets content editors reference **all** users — both active and
-blocked — in the "Authored by" field and in any custom user reference field,
+This module lets content editors reference **all** users, both active and
+blocked, in the "Authored by" field and in any custom user reference field,
 *without* granting them *Administer users*. It does this by adding a single,
 assignable permission, **Reference blocked users**. Existing patches on
 drupal.org only address the custom field's configuration form; because the
@@ -36,7 +36,7 @@ drupal.org only address the custom field's configuration form; because the
 is the one solution that covers both cases.
 
 For users who have the permission, the autocomplete also matches on the **email
-address** as well as the username — core only ever matches the username.
+address** as well as the username. Core only ever matches the username.
 
 ## Requirements
 
@@ -50,7 +50,7 @@ for further information.
 
 ## Configuration
 
-This module has no settings page. Its behaviour is controlled entirely by the
+This module has no settings page. Its behavior is controlled entirely by the
 permission below.
 
 ## Permissions
@@ -58,7 +58,7 @@ permission below.
 Grant the **Reference blocked users** permission to any role that should be able
 to reference active and blocked users in user reference fields (including
 "Authored by"). Users who already have *Administer users* keep core's default
-behaviour.
+behavior.
 
 ## Maintainers
 
