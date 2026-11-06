@@ -1,5 +1,5 @@
 name: 'Reference Blocked Users'
 type: module
-description: 'Permission to select all active and blocked users in any entity reference user field.'
+description: 'Adds a permission to select blocked users, as well as active ones, in user reference fields.'
 package: Permissions
 core_version_requirement: ^11.3 || ^12
